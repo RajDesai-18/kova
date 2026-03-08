@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspace   Workspace?
+  memberships WorkspaceMember[]
+
+  @@map("users")
+}
+
+model Workspace {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  userId    String   @unique @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  documents Document[]
+  members   WorkspaceMember[]
+
+  @@map("workspaces")
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  title     String   @default("Untitled")
+  content   Json?
+  ydoc      Bytes?    @map("ydoc")
+  icon      String?
+  isArchived Boolean @default(false) @map("is_archived")
+  position  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspaceId String    @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  parentId String?   @map("parent_id")
+  parent   Document? @relation("DocumentTree", fields: [parentId], references: [id], onDelete: Cascade)
+  children Document[] @relation("DocumentTree")
+
+  @@map("documents")
+}
+
+model WorkspaceMember {
+  id          String   @id @default(cuid())
+  role        String   @default("editor")
+  joinedAt    DateTime @default(now()) @map("joined_at")
+
+  workspaceId String   @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+  @@map("workspace_members")
+}

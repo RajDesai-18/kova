@@ -1,0 +1,22 @@
+{
+  "name": "kova",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "db:generate": "npm run db:generate --workspace=apps/server",
+    "db:push": "npm run db:push --workspace=apps/server",
+    "db:seed": "npm run db:seed --workspace=apps/server"
+  },
+  "packageManager": "npm@11.11.0",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "turbo": "^2"
+  }
+}

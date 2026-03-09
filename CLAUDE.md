@@ -35,7 +35,7 @@ Collaborative AI-assisted workspace (Notion-like). Portfolio project.
 
 **Phase 1: Foundation** — Complete. Handed off. See [`docs/phase1-handoff.md`](docs/phase1-handoff.md).
 
-**Phase 2: Real-Time Collaboration** — Complete.
+**Phase 2: Real-Time Collaboration** — Complete. Handed off. See [`docs/phase2-handoff.md`](docs/phase2-handoff.md).
 
 ### Phase 2 Checklist
 
@@ -75,7 +75,7 @@ Collaborative AI-assisted workspace (Notion-like). Portfolio project.
 - `docker compose up -d` — Postgres + Redis running
 - `npm run db:push` — schema applied
 - `npm run db:seed` — demo users seeded (demo@kova.app + demo2@kova.app / password123)
-- Playwright E2E: 2/2 tests pass (register→login→create→edit→sidebar→logout flow + demo account login)
+- Playwright E2E: 52/52 tests pass (full-flow 2, editor-features 34, collaboration 3, new-features 13)
 - Screenshots captured in `e2e/screenshots/`
 
 ## Project Docs
@@ -86,7 +86,9 @@ Collaborative AI-assisted workspace (Notion-like). Portfolio project.
 - [`docs/phase1-handoff.md`](docs/phase1-handoff.md) — Phase 1 handoff summary (features, API, schema, Phase 2 notes)
 - [`docs/plans/2026-03-07-editor-upgrade-design.md`](docs/plans/2026-03-07-editor-upgrade-design.md) — Editor upgrade design
 - [`docs/phase2-plan.md`](docs/phase2-plan.md) — Phase 2 plan & status (real-time collaboration)
+- [`docs/phase2-handoff.md`](docs/phase2-handoff.md) — Phase 2 handoff summary (collaboration, WebSocket, presence, Phase 3 notes)
 - [`docs/plans/2026-03-07-editor-upgrade-plan.md`](docs/plans/2026-03-07-editor-upgrade-plan.md) — Editor upgrade implementation plan
+- [`docs/plans/2026-03-08-trash-toggle-darkmode.md`](docs/plans/2026-03-08-trash-toggle-darkmode.md) — Trash, toggle title, dark mode plan
 
 ## Rules
 
